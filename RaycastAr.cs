@@ -38,7 +38,34 @@ void Update()
         }
 
     }
+//for mouse
+	 void Update(){
+	   if (Input.GetMouseButtonDown(0)){ // if left button pressed...
+	     Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+	     RaycastHit hit;
+	     if (Physics.Raycast(ray, out hit)){
+	       // the object identified by hit.transform was clicked
+   
+	                  if( hit.collider.tag ==  "scroll" ||hit.collider.tag ==  "gem"){
 
+										Debug.Log("You Hit a "+hit.collider.tag);	
+ 				
+    						    		GetWebView getwebview = hit.collider.gameObject.GetComponent<GetWebView>();
+    						    		getwebview.canvasOpen();
+    						    		Debug.Log("collider hit getwebview.latValue="+getwebview.latValue);		                			
+		                		
+		              }
+					  
+					if(hit.collider.tag ==  "key" || hit.collider.tag == "chest"){
+						Debug.Log("can't open keys or chests in map mode");
+					}
+		         
+                		
+	        
+	       // defaulto whatever you want
+	     }
+	   }
+	 }
 
     //in getwebview the object holds lat and long info and userinfo in order to submit proof of quest submission.
     void canvasOpen()
